@@ -8,7 +8,7 @@ Some things I don't know how to do and want examples of: ([drive-by-contribution
 
 * using artifacts
   - is there an ArtifactProvider type thing? e.g. so artifacts could be pushed to S3 or any other custom location?
-    > answer: Artifacts are being phased out, but they're being replaced with caches (what's an artifact store besides a cache?). One should use a `ProjectListener` to add a hook after relevant goals (i.e. build) which will have access to the project directory and can upload specified files, etc. An example: `S3GoalCacheArchiveStore` in sdm-pack-s3
+    > answer: Artifacts are being phased out, but they're being replaced with caches (what's an artifact store besides a cache?). One should use a `ProjectListener` to add a hook after relevant goals (i.e. build) which will have access to the project directory and can upload specified files, etc. An example: `S3GoalCacheArchiveStore` in sdm-pack-s3. Source: deprecation of Artifact object - see history of sdm-pack-build
  - how do we access available ~artifacts~ cached outputs? query graph?
 
 ## Adding GitHub Checks to Goals
