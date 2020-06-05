@@ -2,11 +2,14 @@
 
 Atomist need examples for the SDM devs, here are some I've compiled
 
+#### Example Requests
+
 Some things I don't know how to do and want examples of: ([drive-by-contribution thread](https://github.com/XertroV/atomist-sdm-examples/issues/1))
 
 * using artifacts
-  * is there an ArtifactProvider type thing? e.g. so artifacts could be pushed to S3 or any other custom location?
-  * how do we access available artifacts? query graph?
+ * is there an ArtifactProvider type thing? e.g. so artifacts could be pushed to S3 or any other custom location?
+  * answer: Artifacts are being phased out, but they're being replaced with caches (what's an artifact store besides a cache?). One should use a `ProjectListener` to add a hook after relevant goals (i.e. build) which will have access to the project directory and can upload specified files, etc. An example: `S3GoalCacheArchiveStore` in sdm-pack-s3
+ * how do we access available ~artifacts~ cached outputs? query graph?
 
 ## Adding GitHub Checks to Goals
 
@@ -21,7 +24,9 @@ Some things I don't know how to do and want examples of: ([drive-by-contribution
 
 * starting a script: https://github.com/XertroV/sdm-everything/blob/0923f23e83a9a7d28e4b81f8a6c740e40b12128b/lib/machine.ts#L171
 
-## 
+## S3 Integration
+
+* https://github.com/XertroV/sdm-everything/blob/d5c44d6364cb47b55b9e2de623ccee0ce4611a77/lib/machine.ts#L209
 
 # Avoid using cortex if that's your thing (or Atomist goes down)
 
