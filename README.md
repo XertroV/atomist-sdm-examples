@@ -10,7 +10,12 @@ Some things I don't know how to do and want examples of: ([drive-by-contribution
   - is there an ArtifactProvider type thing? e.g. so artifacts could be pushed to S3 or any other custom location?
     > answer: Artifacts are being phased out, but they're being replaced with caches (what's an artifact store besides a cache?). One should use a `ProjectListener` to add a hook after relevant goals (i.e. build) which will have access to the project directory and can upload specified files, etc. An example: `S3GoalCacheArchiveStore` in sdm-pack-s3. Source: deprecation of Artifact object - see history of sdm-pack-build
  - how do we access available ~artifacts~ cached outputs? query graph?
-   > so we reference caches via their classification I think, and use cacheRestore and cachePut as goal-project listeners, passing in the classificatino and maybe path of the files.
+   > so we reference caches via their classifier I think, and use cacheRestore and cachePut as goal-project listeners, passing in the classifier and maybe path of the files.
+   > ---
+   > after some experimentation: locally caches are stored at ~/.atomist/cache/{classification}/{gitSha}-cache.tar.gz (this is presumably using the default LocalCompressedCache (named something like that)
+   > Fun fact: use `onCacheMiss` via `cacheRestore` to do stuff like `npm install`
+   > Example: https://github.com/atomist/samples/blob/1908cb8cce9d7c218eb111186276eded1eff4957/lib/sdm/cache.ts
+   > (just found that @atomist/samples repo -- not sure why I haven't found that previously
 
 ## Adding GitHub Checks to Goals
 
