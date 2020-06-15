@@ -6,7 +6,7 @@ Atomist need examples for the SDM devs, here are some I've compiled
 
 Some things I don't know how to do and want examples of: ([drive-by-contribution thread](https://github.com/XertroV/atomist-sdm-examples/issues/1))
 
-* using artifacts
+* using artifacts (update below)
   - is there an ArtifactProvider type thing? e.g. so artifacts could be pushed to S3 or any other custom location?
     > answer: Artifacts are being phased out, but they're being replaced with caches (what's an artifact store besides a cache?). One should use a `ProjectListener` to add a hook after relevant goals (i.e. build) which will have access to the project directory and can upload specified files, etc. An example: `S3GoalCacheArchiveStore` in sdm-pack-s3. Source: deprecation of Artifact object - see history of sdm-pack-build
  - how do we access available ~artifacts~ cached outputs? query graph?
@@ -17,6 +17,10 @@ Some things I don't know how to do and want examples of: ([drive-by-contribution
    > 
    > Example: https://github.com/atomist/samples/blob/1908cb8cce9d7c218eb111186276eded1eff4957/lib/sdm/cache.ts
    > (just found that @atomist/samples repo -- not sure why I haven't found that previously)
+* Caching outputs updated
+  - Example of correct usage: https://github.com/atomist/atomist-web-sdm/blob/8cf44d0b114501693856a231cee17651da99c225/index.ts#L227-L228
+  - classifier is a template-string that ahs repo.name and things in it, fits in like so `~/.atomist/cache/<classifier>/cache-file.tar.gz`
+  - example classifier: `${repo.owner}/${repo.name}/${sha}/node_modules`
 
 ## Adding GitHub Checks to Goals
 
